@@ -1,4 +1,4 @@
-FROM debian:stable
+FROM debian:stable-slim
 
 LABEL about.license="SPDX:Apache-2.0"
 
