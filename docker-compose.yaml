@@ -1,12 +1,37 @@
 version: "3.8"
 
 services:
-  ghcr-template:
-    image: ghcr.io/ahayden/ghcr-template:base
+  base:
+    image: ghcr.io/ahayden/astrobox:base
     hostname: base
     environment:
       TERM: "xterm-color"
     extra_hosts:
       - "base:127.0.0.1"
+    ports:
+      - "2223:22"
     container_name: base
+    volumes:
+      - ~/src:/home/$USER/src
+      - ~/.config/git:/home/$USER/.config/git
+      - ~/.vimrc:/home/$USER/.vimrc
+      - home-persist:/home/$USER/persist
+    command: sudo /usr/sbin/sshd -D -e
+# or, `docker compose run dev bash`
 
+  astro:
+    image: ghcr.io/ahayden/astrobox:astro
+    hostname: astro
+    environment:
+      TERM: "xterm-color"
+    extra_hosts:
+      - "astro:127.0.0.1"
+    container_name: astro
+    volumes:
+      - ~/src:/home/$USER/src
+      - ~/.config/git:/home/$USER/.config/git
+      - ~/.vimrc:/home/$USER/.vimrc
+      - home-persist:/home/$USER/persist
+
+volumes:
+  home-persist:

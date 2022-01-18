@@ -17,11 +17,21 @@ RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
         gnupg2 \
         apt-transport-https \
         ca-certificates \
-        sudo \
     && update-ca-certificates \
     && apt-get -y autoclean \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update -qq -y && apt-get install --no-install-recommends -qq -y \
+        bash-completion nmap ncat binutils \
+	      dnsutils net-tools iputils-ping git \
+        htop openssh-client openssh-server sudo tmux \
+        vim socat \
+    && apt-get -y autoclean \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /run/sshd
 
 RUN adduser --disabled-password ${container_user} \
     && usermod -a -G users ${container_user} \
@@ -29,6 +39,14 @@ RUN adduser --disabled-password ${container_user} \
     && echo "${container_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${container_user} \
     && chmod 0440 /etc/sudoers.d/${container_user}
 
+RUN su - ${container_user} -c "cd && \
+    mkdir -p persist/.ssh && ln -s persist/.ssh . ; \
+    touch persist/.ssh/authorized_keys ; \
+    mkdir -p persist/.gnupg && ln -s persist/.gnupg . ; \
+    mkdir -p persist/.config && ln -s persist/.config ."
+
 USER ${container_user}
+
+WORKDIR /home/${container_user}
 
 CMD ["/bin/bash","-l"]
