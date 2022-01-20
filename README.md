@@ -1,7 +1,7 @@
 # Debian astro as a local container
 This container script includes `base` and `astro` definitions. The base
 container is for creating an SSH tunnel. The astro definition displays a
-WindowMaker desktop over VNC, routeable through the tunnel when run
+metacity desktop over VNC, routeable through the tunnel when run
 properly via `docker-compose.yaml`
 
 ## Setup
@@ -55,6 +55,4 @@ remote host instead...
 this script sets the VNC password to "fixthisbug". This is fine because 
 the VNC interface is presented only to the container network and 
 authorization actually happens at the SSH step.
-- The display options need to be optimized
-- Needs local git env config
 
