@@ -17,7 +17,7 @@ services:
       - ~/.vimrc:/home/$USER/.vimrc
       - home-persist:/home/$USER/persist
     command: sudo /usr/sbin/sshd -D -e
-# or, `docker compose run dev bash`
+# or, `docker compose run base /bin/bash -l`
 
   astro:
     image: ghcr.io/ahayden/astrobox:astro

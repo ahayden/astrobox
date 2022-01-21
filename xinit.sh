@@ -1,9 +1,8 @@
 #!/bin/bash
 Xvfb :10 -screen 0 1396x876x24 &
 x11vnc -noipv6 -xkb -noxdamage -xfixes -noxrecord -noscrollcopyrect \
-  -wireframe -nowcr -passwd fixthisbug -nonc \
+  -nowireframe -nowcr -passwd fixthisbug -nonc \
   -noserverdpms -nodpms -display :10 -N -nevershared -forever &
 sleep 5 
-xrdb -merge /usr/local/Xdefaults
-xterm &
-metacity 2> /dev/null
+x-terminal-emulator &
+exec mate-session
