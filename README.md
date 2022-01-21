@@ -1,8 +1,8 @@
 # Debian astro as a local container
 This container script includes `base` and `astro` definitions. The base
 container is for creating an SSH tunnel. The astro definition displays a
-metacity desktop over VNC, routeable through the tunnel when run
-properly via `docker-compose.yaml`
+MATE desktop over VNC, routeable through the tunnel when run properly via 
+`docker-compose.yaml`
 
 ## Setup
 1. Read the Dockerfiles and GitHub Actions scripts.
