@@ -24,6 +24,7 @@ services:
     hostname: astro
     environment:
       TERM: "xterm-color"
+      RESOLUTION: ${RESOLUTION:-2048x1280x24}
     extra_hosts:
       - "astro:127.0.0.1"
     container_name: astro

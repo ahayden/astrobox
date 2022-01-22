@@ -36,6 +36,21 @@ MATE desktop over VNC, routeable through the tunnel when run properly via
          - ~/.config/git:/home/$USER/.config/git
          - ~/.vimrc:/home/$USER/.vimrc
       ```
+
+## Display
+1. You can override the Xvfb resolution by adding a string that defines
+   resolution and color depth in a `.env` file in the same director as the
+   compose file:
+   ```
+   $ cat .env 
+     RESOLUTION=2560x1600x24
+   ```
+2. HiDP works, but a lot of the astro apps use a Tcl/Tk UI, which isn't
+   optimized.
+  - `mate-tweak` -> Windows -> HiDP to scale up most apps to have crisp fonts
+  - Set the MacOS VNC client to Display -> Show full size
+  - Pass `-Dsun.java2d.uiScale=2.0` to a java app
+
 ## Connecting
 'Container runner' is most likely your local machine. 
 1. Run the astro container from your container runner
